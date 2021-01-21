@@ -26,6 +26,10 @@ connection.authenticate()
         console.log(erro);
     });
 
+app.get('/', (req, res) => {
+    res.render('index')
+})
+
 //rotas
 app.use('/', categoriesController); // rotas de categorias
 app.use('/', articlesController) // rotas de articles
