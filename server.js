@@ -24,7 +24,7 @@ connection.authenticate()
     });
 
 //rotas
-app.use('/', categoriesController); // rotas de categorais
+app.use('/', categoriesController); // rotas de categorias
 app.use('/', articlesController) // rotas de articles
 
 app.listen(8080, () => {
