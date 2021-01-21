@@ -17,9 +17,9 @@ app.use(bodyParser.json());
 //database connection
 connection.authenticate()
     .then(() => {
-        console.log('Conexão database feita com sucesso!')
+        console.log('Conexão database feita com sucesso!');
     }).catch(erro => {
-        console.log(erro)
+        console.log(erro);
     });
 
 //rotas
