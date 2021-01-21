@@ -11,4 +11,8 @@ const Category = connection.define('categories', {
     }
 });
 
+
+// recriando tabelas
+// Category.sync({ force: true });
+
 module.exports = Category;
