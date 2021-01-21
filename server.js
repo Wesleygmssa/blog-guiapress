@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
 const connection = require('./database/database');
+const categoriesController = require('./categories/CategoriesController');
 
 //View engine
 app.set('view engine', 'ejs');
@@ -22,9 +23,7 @@ connection.authenticate()
     });
 
 //rotas
-app.get('/', (req, res) => {
-    res.render("index");
-});
+app.use('/', categoriesController); // utilizar rotas que estão dentro desse arquivo
 
 
 app.listen(8080, () => {
