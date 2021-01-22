@@ -15,7 +15,7 @@
                                 placeholder="Defina o título do artigo"><br>
 
                             <textarea class="form-control" placeholder="Escreva o artigo aqui!" name="body" cols="30"
-                                rows="10">
+                                id="article" rows="10">
                         </textarea><br>
                             <button class="btn btn-success">Cadastrar</button>
                         </form>
@@ -24,3 +24,14 @@
             </div>
         </body>
         <%- include('../../components/footer.ejs'); %>
+
+            <script src="/tinymce/tinymce.min.js"></script>
+            <script>
+                tinymce.init({
+                    language: 'pt_BR',
+                    selector: "#article",
+                    plugins: [
+                        'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
+                    ]
+                })
+            </script>
