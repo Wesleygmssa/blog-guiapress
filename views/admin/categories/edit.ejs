@@ -6,16 +6,23 @@
                 <hr>
                 <div class="card">
                     <div class="card-header">
-                        <h2>Cadastro de categoria</h2>
+                        <h2>Edição de categoria</h2>
                     </div>
                     <div class="card-body">
-                        <form action="/categories/save" method="POST">
+                        <form action="/categories/update" method="POST">
+
                             <input class="form-control" type="text" name="title"
-                                placeholder="Defina o título da categoria"><br>
-                            <button class="btn btn-success">Cadastrar</button>
+                                placeholder="Defina o título da categoria" value="<%= category.title %>
+                            "><br>
+
+                            <input type="hidden" name="id" value="<%= category.id%>">
+
+                            <button class="btn btn-success">Atualizar</button>
                         </form>
                     </div>
                 </div>
             </div>
         </body>
+
+
         <%- include('../../components/footer.ejs'); %>

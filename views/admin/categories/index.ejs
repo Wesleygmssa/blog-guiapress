@@ -1,7 +1,5 @@
 <%- include('../../components/header.ejs'); %>
     <%- include('../../components/navbar.ejs'); %>
-
-
         <div class="container">
             <hr>
             <h2>Categoria</h2>
@@ -29,19 +27,21 @@
                                 <%= category.slug %>
                             </th>
                             <th>
-                                <button class="btn btn-warning">Editar</button>
+                                <a class=" btn btn-warning" href="/admin/categories/edit/<%=category.id %> ">
+                                    Editar
+                                </a>
 
-                                <form action="/categories/delete" method="POST" style="display:inline;">
+                                <form action="/categories/delete" method="POST" style="display:inline;"
+                                    onsubmit="confirmationDelete(event, this)">
+
                                     <input type="hidden" name="id" value="<%=category.id%> ">
                                     <button class="btn btn-danger">Deletar</button>
                                 </form>
                             </th>
-
                         </tr>
                         <% }) %>
                 </tbody>
             </table>
         </div>
-
 
         <%- include('../../components/footer.ejs'); %>

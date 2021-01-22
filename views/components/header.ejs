@@ -12,4 +12,16 @@
 
     <title>Guiapress</title>
     <link rel="stylesheet" href="">
+
+    <script>
+        function confirmationDelete(event, form) {
+            event.preventDefault();
+            const decision = confirm('Deseja realmente deletar?');
+            if (decision) {
+                form.submit();
+            } else {
+                // alert('')
+            }
+        }
+    </script>
 </head>
