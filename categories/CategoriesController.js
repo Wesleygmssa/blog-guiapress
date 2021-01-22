@@ -77,7 +77,7 @@ router.post("/categories/update", (req, res) => {
     const { id } = req.body; //pegando id
     const { title } = req.body;
 
-    Category.update({ title: title }, {
+    Category.update({ title: title, slug: slugify(title), }, {
         where: { id: id }
     }).then(() => {
         res.redirect("/admin/categories");
