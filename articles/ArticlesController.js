@@ -2,9 +2,20 @@ const express = require("express");
 const { default: slugify } = require("slugify");
 const router = express.Router();
 const Category = require('../categories/Category');
+const Article = require('../articles/Article');
 
-router.get('/articles', (req, res) => {
-    res.send('Rota de artigos')
+router.get('/admin/articles', (req, res) => {
+    Article.findAll({
+        include: [{ model: Category }],
+    }).then((articles) => {
+
+        res.render('admin/articles/index', { articles });
+    }).catch(error => {
+        res.redirect('/admin/articles/index')
+    })
+
+    // res.render('admin/articles/index');
+
 });
 
 router.get("/admin/articles/new", (req, res) => {
@@ -16,13 +27,37 @@ router.get("/admin/articles/new", (req, res) => {
 
 router.post('/articles/save', (req, res) => {
     const { title, body, category } = req.body;
-
     Article.create({
         title,
         slug: slugify(title),
         body,
         categoryId: category// campo que gerado quando tem relacionamento entre tabelas (Chave estrangeira)
-    });
+    }).then(() => {
+        res.redirect('/admin/articles');
+    })
+});
+
+
+//deletando dados do bando
+router.post('/article/delete', (req, res) => {
+    const { id } = req.body;
+    if (id !== undefined) { //diferente de nulo
+        if (!isNaN(id)) { //For numero
+            Article.destroy({
+                where: {
+                    id: id
+                }
+            }).then(() => {
+                res.redirect('/admin/articles');
+            })
+
+        } else {
+            res.redirect('admin/article');
+        }
+    } else { //NULL
+        res.redirect('admin/article');
+
+    }
 });
 
 module.exports = router;

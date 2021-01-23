@@ -26,13 +26,40 @@ connection.authenticate()
         console.log(erro);
     });
 
-app.get('/', (req, res) => {
-    res.render('index')
-})
 
 //rotas
 app.use('/', categoriesController); // rotas de categorias
 app.use('/', articlesController) // rotas de articles
+
+
+app.get('/', (req, res) => {
+    Article.findAll({
+        order:[
+            ['id', 'DESC']
+        ]
+    }).then(articles => {
+        res.render('index', { articles })
+    })
+    // res.render('index')
+})
+
+app.get('/:slug', (req, res) => {
+    const { slug } = req.params;
+    Article.findOne({
+        where: {
+            slug: slug
+        }
+    }).then(article => {
+        if (article != undefined) {
+            res.render("article", { article });
+        } else {
+            res.redirect("/")
+        }
+    }).catch(error => {
+        res.redirect("/")
+    })
+})
+
 
 app.listen(8080, () => {
     console.log("O servidor está rodando!");
