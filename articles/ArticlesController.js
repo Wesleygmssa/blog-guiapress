@@ -4,6 +4,8 @@ const router = express.Router();
 const Category = require('../categories/Category');
 const Article = require('../articles/Article');
 
+
+
 router.get('/admin/articles', (req, res) => {
     Article.findAll({
         include: [{ model: Category }],
@@ -76,18 +78,6 @@ router.get("/admin/articles/edit/:id", (req, res) => {
         res.redirect("/");
     })
 });
-
-// router.post('/articles/update', (req, res) => {
-//     const { id, title, body, category } = req.body;
-
-
-//     Article.update({ title: title, body: body, categoryId: category, slug: slugify(title), }, {
-//         where: { id: id }
-//     }).then(() => {
-//         res.redirect("/admin/articles");
-//     });
-// });
-
 
 router.post("/articles/update", (req, res) => {
     const { id } = req.body; //pegando id
