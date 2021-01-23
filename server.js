@@ -34,14 +34,17 @@ app.use('/', articlesController) // rotas de articles
 
 app.get('/', (req, res) => {
     Article.findAll({
-        order:[
+        order: [
             ['id', 'DESC']
         ]
     }).then(articles => {
-        res.render('index', { articles })
-    })
+        Category.findAll().then(categories => {
+
+            res.render('index', { articles, categories });
+        })
+    });
     // res.render('index')
-})
+});
 
 app.get('/:slug', (req, res) => {
     const { slug } = req.params;
@@ -51,15 +54,37 @@ app.get('/:slug', (req, res) => {
         }
     }).then(article => {
         if (article != undefined) {
-            res.render("article", { article });
+            Category.findAll().then(categories => {
+
+                res.render('article', { article, categories });
+            })
         } else {
             res.redirect("/")
         }
     }).catch(error => {
         res.redirect("/")
-    })
-})
+    });
+});
 
+app.get("/category/:slug", (req, res) => {
+    const { slug } = req.params;
+    Category.findOne({
+        where: {
+            slug: slug,
+        },
+        include: [{ model: Article }] // join dentro de um array
+    }).then(category => {
+        if (category != undefined) {
+            Category.findAll().then((categories) => {
+                res.render('index', { articles: category.articles, categories });
+            })
+        } else {
+            res.redirect("/")
+        }
+    }).catch(err => {
+        res.redirect('/')
+    })
+});
 
 app.listen(8080, () => {
     console.log("O servidor está rodando!");

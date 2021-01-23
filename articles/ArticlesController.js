@@ -37,7 +37,6 @@ router.post('/articles/save', (req, res) => {
     })
 });
 
-
 //deletando dados do bando
 router.post('/article/delete', (req, res) => {
     const { id } = req.body;
@@ -58,6 +57,24 @@ router.post('/article/delete', (req, res) => {
         res.redirect('admin/article');
 
     }
+});
+
+router.get("/admin/articles/edit/:id", (req, res) => {
+    const { id } = req.params;
+    Article.findByPk(id).then((article) => {
+        if (article !== undefined) {
+
+            Category.findAll().then(categories => { //select
+
+                res.render("admin/articles/edit", { categories, article })
+            });
+        } else {
+            res.redirect("/");
+
+        }
+    }).catch(err => {
+        res.redirect("/");
+    })
 });
 
 module.exports = router;
