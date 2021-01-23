@@ -77,4 +77,30 @@ router.get("/admin/articles/edit/:id", (req, res) => {
     })
 });
 
+// router.post('/articles/update', (req, res) => {
+//     const { id, title, body, category } = req.body;
+
+
+//     Article.update({ title: title, body: body, categoryId: category, slug: slugify(title), }, {
+//         where: { id: id }
+//     }).then(() => {
+//         res.redirect("/admin/articles");
+//     });
+// });
+
+
+router.post("/articles/update", (req, res) => {
+    const { id } = req.body; //pegando id
+    const { title } = req.body;
+    const { body } = req.body;
+    const { category } = req.body;
+
+
+    Article.update({ title: title, body: body, categoryId: category, slug: slugify(title) }, {
+        where: { id: id }
+    }).then(() => {
+        res.redirect("/admin/articles");
+    });
+});
+
 module.exports = router;
