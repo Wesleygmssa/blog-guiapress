@@ -36,7 +36,8 @@ app.get('/', (req, res) => {
     Article.findAll({
         order: [
             ['id', 'DESC']
-        ]
+        ],
+        limit: 4
     }).then(articles => {
         Category.findAll().then(categories => {
 
@@ -45,6 +46,8 @@ app.get('/', (req, res) => {
     });
     // res.render('index')
 });
+
+
 
 app.get('/:slug', (req, res) => {
     const { slug } = req.params;
@@ -65,6 +68,8 @@ app.get('/:slug', (req, res) => {
         res.redirect("/")
     });
 });
+
+
 
 app.get("/category/:slug", (req, res) => {
     const { slug } = req.params;
