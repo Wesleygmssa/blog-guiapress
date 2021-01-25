@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 
 //sessions
 app.use(session({
-    secret: "unhsgtfebgahlooejhnbagqzanbdgagyaikaneh", cookie: { maxAge: 30000 }
+    secret: "unhsgtfebgahlooejhnbagqzanbdgagyaikaneh", cookie: { maxAge: 3000000 }
 }));
 
 // static
@@ -40,17 +40,15 @@ app.use('/', categoriesController); // rotas de categorias
 app.use('/', articlesController) // rotas de articles
 app.use('/', usersController);
 
+// //sessão salvando os dados
+// app.get("/session", (req, res) => {
 
-//sessão salvando os dados
-app.get("/session", (req, res) => {
+// });
 
-});
+// //lendo os dados
+// app.get("/leitura", (req, res) => {
 
-
-//lendo os dados
-app.get("/leitura", (req, res) => {
-
-});
+// });
 
 app.get('/', (req, res) => {
     Article.findAll({
@@ -66,8 +64,6 @@ app.get('/', (req, res) => {
     });
     // res.render('index')
 });
-
-
 
 app.get('/:slug', (req, res) => {
     const { slug } = req.params;
@@ -88,8 +84,6 @@ app.get('/:slug', (req, res) => {
         res.redirect("/")
     });
 });
-
-
 
 app.get("/category/:slug", (req, res) => {
     const { slug } = req.params;
