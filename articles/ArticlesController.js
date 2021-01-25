@@ -10,7 +10,7 @@ router.get('/admin/articles', (req, res) => {
     Article.findAll({
         include: [{ model: Category }],
     }).then((articles) => {
-
+        console.log(articles.categoryId)
         res.render('admin/articles/index', { articles });
     }).catch(error => {
         res.redirect('/admin/articles/index')
