@@ -20,7 +20,7 @@ const Article = connection.define('articles', {
 // uma categoria tem muitos artigos;
 Category.hasMany(Article);
 // um artigo pertece a uma categoria;
-Article.belongsTo(Category); //categoryId
+Article.belongsTo(Category); //categoryId //relacionamento
 
 // Article.sync({ force: true }); 
 // recriando tabela

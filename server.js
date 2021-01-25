@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 //sessions
 app.use(session({
     secret: "unhsgtfebgahlooejhnbagqzanbdgagyaikaneh", cookie: { maxAge: 30000 }
-}))
+}));
 
 // static
 app.use(express.static('public'));
@@ -40,6 +40,17 @@ app.use('/', categoriesController); // rotas de categorias
 app.use('/', articlesController) // rotas de articles
 app.use('/', usersController);
 
+
+//sessão salvando os dados
+app.get("/session", (req, res) => {
+
+});
+
+
+//lendo os dados
+app.get("/leitura", (req, res) => {
+
+});
 
 app.get('/', (req, res) => {
     Article.findAll({
