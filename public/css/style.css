@@ -7,16 +7,15 @@
 }
 
 nav.nav-bar{
-    padding: 40px 80px;
+    padding: 20px 80px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    
 }
 
-nav.nav-bar a.logo{
-    font-size: 32px;
+nav.nav-bar .logo{
     text-decoration: none;
-    color: black;
 }
 
 .nav-bar ul {
@@ -28,19 +27,17 @@ nav.nav-bar a.logo{
 
 .nav-bar ul a{
     font-weight: 600;
-    font-size: 18px;
-    color: black;
+    font-size: 15px;
+    color:#161b3d;
     margin-right: 16px;
     transition: all 0.5s;
+    text-decoration: none;
+    line-height: 30px; 
+    letter-spacing: 3px; 
+    word-spacing: 3px;
+    
 }
 .nav-bar ul a:hover{
     opacity: 0.7;
 }
 
-.nav-bar ul a + a {
-    margin: 16px;
-    font-weight: 700;
-    color: black;
-    font-size: 18px;
-
-}

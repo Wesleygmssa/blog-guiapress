@@ -1,16 +1,16 @@
 <nav class="nav-bar">
     <a class="logo" href="/">
-        LOGO
+        <h1>Logo</h1>
     </a>
 
     <ul>
 
-        <a href="/">
+        <a href="/" class="link-menu">
             HOME
         </a>
 
         <% categories.forEach(category=>{ %>
-            <a href="/category/<%= category.slug  %> ">
+            <a href="/category/<%= category.slug  %> " class="link-menu">
                 <%=category.title%>
             </a>
             <%}) %>
