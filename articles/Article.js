@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const connection = require('../database/database'); //conexão banco 
 const Category = require('../categories/Category');
 
+//criação de tabela
 const Article = connection.define('articles', {
     title: {
         type: Sequelize.STRING,
@@ -17,12 +18,12 @@ const Article = connection.define('articles', {
 });
 
 
-// uma categoria tem muitos artigos;
-Category.hasMany(Article);
-// um artigo pertece a uma categoria;
-Article.belongsTo(Category); //categoryId //relacionamento
 
-// Article.sync({ force: true }); 
-// recriando tabela
+Category.hasMany(Article); // uma categoria tem muitos artigos;
+
+Article.belongsTo(Category); //categoryId //relacionamento de tabelas // um artigo pertece a uma categoria;
+
+// Article.sync({ force: true });  // recriando tabela
+
 
 module.exports = Article;

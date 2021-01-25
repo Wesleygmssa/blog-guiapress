@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 const connection = require('../database/database'); //conexão banco 
 
+
+//criação de tabela
 const Category = connection.define('categories', {
     title: {
         type: Sequelize.STRING,
@@ -11,8 +13,6 @@ const Category = connection.define('categories', {
     }
 });
 
-
-// recriando tabelas
-// Category.sync({ force: true });
+// Category.sync({ force: true }); // recriando tabelas
 
 module.exports = Category;

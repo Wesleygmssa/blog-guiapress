@@ -5,7 +5,7 @@ const slugify = require('slugify');
 const adminAuth = require('../middlewares/adminAuth');
 
 
-
+//renderizando pagina
 router.get("/admin/categories/new", adminAuth, (req, res) => {
     res.render('admin/categories/new');
 });
@@ -56,6 +56,7 @@ router.post('/categories/delete', adminAuth, (req, res) => {
     }
 });
 
+//identificação por id
 router.get("/admin/categories/edit/:id", adminAuth, (req, res) => {
     const { id } = req.params;
     if (isNaN(id)) {
@@ -75,6 +76,7 @@ router.get("/admin/categories/edit/:id", adminAuth, (req, res) => {
 
 });
 
+//atualização com sequelize 
 router.post("/categories/update", adminAuth, (req, res) => {
     const { id } = req.body; //pegando id
     const { title } = req.body;
