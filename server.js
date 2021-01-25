@@ -4,9 +4,11 @@ const bodyParser = require("body-parser");
 const connection = require('./database/database');
 const categoriesController = require('./categories/CategoriesController');
 const articlesController = require('./articles/ArticlesController');
+const usersController = require('./user/UsersController');
 
 const Article = require('./articles/Article');
 const Category = require('./categories/Category');
+const User = require('./user/user');
 
 //View engine
 app.set('view engine', 'ejs');
@@ -30,6 +32,7 @@ connection.authenticate()
 //rotas
 app.use('/', categoriesController); // rotas de categorias
 app.use('/', articlesController) // rotas de articles
+app.use('/', usersController);
 
 
 app.get('/', (req, res) => {
