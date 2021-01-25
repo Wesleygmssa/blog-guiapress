@@ -7,9 +7,9 @@
 }
 
 nav.nav-bar{
-    padding: 20px 80px;
+    padding: 40px 80px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     
 }
@@ -33,11 +33,18 @@ nav.nav-bar .logo{
     transition: all 0.5s;
     text-decoration: none;
     line-height: 30px; 
-    letter-spacing: 3px; 
+    letter-spacing: 2px; 
     word-spacing: 3px;
     
 }
 .nav-bar ul a:hover{
     opacity: 0.7;
+}
+
+/* banner */
+
+.banner{
+    border: 1px solid red;
+    height: 500px;
 }
 

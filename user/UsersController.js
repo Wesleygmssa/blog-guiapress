@@ -44,6 +44,28 @@ router.post("/users/create", adminAuth, (req, res) => {
 
 });
 
+//deletando dados do bando
+router.post('/user/delete', adminAuth, (req, res) => {
+    const { id } = req.body;
+    if (id !== undefined) { //diferente de nulo
+        if (!isNaN(id)) { //For numero
+            User.destroy({
+                where: {
+                    id: id
+                }
+            }).then(() => {
+                res.redirect('/admin/users');
+            })
+
+        } else {
+            res.redirect('/admin/users');
+        }
+    } else { //NULL
+        res.redirect('/admin/users');
+
+    }
+});
+
 //exibir pagina de login
 router.get("/login", (req, res) => {
     res.render("admin/users/login");
