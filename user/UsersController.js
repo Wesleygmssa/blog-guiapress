@@ -2,22 +2,24 @@ const express = require('express');
 const router = express.Router();
 const User = require("./User");
 const bcrypt = require('bcryptjs');
+const adminAuth = require('../middlewares/adminAuth');
+
 
 
 //lista todos usuários
-router.get("/admin/users", (req, res) => {
+router.get("/admin/users", adminAuth, (req, res) => {
     User.findAll().then(users => {
         res.render("admin/users/index", { users });
     })
 });
 
 //exibir pagina de criação de usuário
-router.get("/admin/users/create", (req, res) => {
+router.get("/admin/users/create", adminAuth, (req, res) => {
     res.render("admin/users/create")
 });
 
 //salvar usuário
-router.post("/users/create", (req, res) => {
+router.post("/users/create", adminAuth, (req, res) => {
     const { email, password } = req.body;
 
     User.findOne({ where: { email } }).then((user) => {
@@ -29,7 +31,7 @@ router.post("/users/create", (req, res) => {
                 email,
                 password: hash,
             }).then(() => {
-                res.redirect("/");
+                res.redirect("/admin/users");
             }).catch((err) => {
                 res.redirect("/");
             })
@@ -61,6 +63,7 @@ router.post("/authenticate", (req, res) => {
                     id: user.id,
                     email: user.email
                 }
+                res.redirect('/admin/articles');
             } else {
                 res.redirect("/login")
 
@@ -71,6 +74,12 @@ router.post("/authenticate", (req, res) => {
         }
     })
 
+});
+
+
+router.get('/logout', (req, res) => {
+    req.session.user = undefined;
+    res.redirect('/login');
 })
 
 module.exports = router;

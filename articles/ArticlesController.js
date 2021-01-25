@@ -3,10 +3,11 @@ const { default: slugify } = require("slugify");
 const router = express.Router();
 const Category = require('../categories/Category');
 const Article = require('./Article');
+const adminAuth = require('../middlewares/adminAuth');
 
 
 
-router.get('/admin/articles', (req, res) => {
+router.get('/admin/articles', adminAuth, (req, res) => {
     Article.findAll({
         include: [{ model: Category }]
     }).then((articles) => {
@@ -19,14 +20,14 @@ router.get('/admin/articles', (req, res) => {
 
 });
 
-router.get("/admin/articles/new", (req, res) => {
+router.get("/admin/articles/new", adminAuth, (req, res) => {
 
     Category.findAll().then(categories => {
         res.render("admin/articles/new", { categories });
     });
 });
 
-router.post('/articles/save', (req, res) => {
+router.post('/articles/save', adminAuth, (req, res) => {
     const { title, body, category } = req.body;
     Article.create({
         title,
@@ -39,7 +40,7 @@ router.post('/articles/save', (req, res) => {
 });
 
 //deletando dados do bando
-router.post('/article/delete', (req, res) => {
+router.post('/article/delete', adminAuth, (req, res) => {
     const { id } = req.body;
     if (id !== undefined) { //diferente de nulo
         if (!isNaN(id)) { //For numero
@@ -60,7 +61,7 @@ router.post('/article/delete', (req, res) => {
     }
 });
 
-router.get("/admin/articles/edit/:id", (req, res) => {
+router.get("/admin/articles/edit/:id", adminAuth, (req, res) => {
     const { id } = req.params;
     Article.findByPk(id).then((article) => {
         if (article !== undefined) {
@@ -78,7 +79,7 @@ router.get("/admin/articles/edit/:id", (req, res) => {
     })
 });
 
-router.post("/articles/update", (req, res) => {
+router.post("/articles/update", adminAuth, (req, res) => {
     const { id } = req.body; //pegando id
     const { title } = req.body;
     const { body } = req.body;
@@ -93,7 +94,7 @@ router.post("/articles/update", (req, res) => {
 });
 
 //logica de paginação
-router.get("/articles/page/:num", (req, res) => {
+router.get("/articles/page/:num", adminAuth, (req, res) => {
     let page = req.params.num;
     let offset = 0;
 
